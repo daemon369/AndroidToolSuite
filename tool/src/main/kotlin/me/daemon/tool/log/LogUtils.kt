@@ -2,8 +2,6 @@
 
 package me.daemon.tool.log
 
-import me.daemon.tool.log.ILogger.Level
-
 /**
  * @author daemon
  * @since 2019-06-28 11:40
