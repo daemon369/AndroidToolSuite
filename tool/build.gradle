@@ -1,12 +1,16 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'com.jfrog.bintray' version '1.8.4'
+}
 
 android {
-    compileSdkVersion 28
-
+    compileSdkVersion compile_sdk_version
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
         versionCode 1
         versionName "1.0"
 
@@ -21,6 +25,14 @@ android {
         }
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "me.daemon.tool"]
+    }
+
 }
 
 dependencies {
@@ -30,4 +42,39 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'androidtool'
+
+    bintrayOverride = false
+
+    publishedGroupId = 'me.daemon'
+    libraryName = 'AndroidToolSuite'
+    artifact = 'androidtool'
+
+    libraryDescription = 'Android tool suite'
+
+    siteUrl = 'https://github.com/daemon369/AndroidToolSuite'
+    gitUrl = 'https://github.com/daemon369/AndroidToolSuite.git'
+
+    libraryVersion = library_version
+
+    developerId = 'daemon369'
+    developerName = 'daemon369'
+    developerEmail = 'daemon336699@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://gist.githubusercontent.com/daemon369/39f43c9406312f3b565b9f8a42923b10/raw/5d4e8f6c030a5b53f3cd7017e1c2b07882b0b72e/upload.gradle'
+
+bintray {
+    override = bintrayOverride
 }
