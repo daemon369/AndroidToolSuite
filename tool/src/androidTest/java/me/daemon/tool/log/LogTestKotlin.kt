@@ -7,7 +7,7 @@ import org.junit.Test
  * @author daemon
  * @since 2019-06-28 16:50
  */
-class LogUtilsTestKotlin {
+class LogTestKotlin {
 
     @Before
     fun before() {

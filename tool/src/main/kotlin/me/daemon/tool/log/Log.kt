@@ -1,4 +1,4 @@
-@file:JvmName("LogUtils")
+@file:JvmName("Log")
 
 package me.daemon.tool.log
 
