@@ -6,6 +6,6 @@ package me.daemon.tool.log
  */
 interface Filter {
 
-    fun filter(logger: ILogger, level: Level, tag: Any, tr: Throwable?, vararg msg: Any?): Boolean
+    fun filter(logger: ILogger, level: Level, tag: Any, throwable: Throwable?, vararg msg: Any?): Boolean
 
 }
