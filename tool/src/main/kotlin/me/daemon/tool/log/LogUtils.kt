@@ -21,42 +21,82 @@ var logger: ILogger
 
 var logLevel = Level.WARN
 
+val defaultFilter = object : Filter {
+
+    override fun filter(logger: ILogger, level: Level): Boolean {
+        return logLevel <= level
+    }
+
+}
+
+var filter: Filter = defaultFilter
+
 fun v(tag: Any, vararg msg: Any?) {
-    logger.v(tag, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.VERBOSE)) return
+
+    l.v(tag, *msg)
 }
 
 fun v(tag: Any, tr: Throwable, vararg msg: Any?) {
-    logger.v(tag, tr, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.VERBOSE)) return
+
+    l.v(tag, tr, *msg)
 }
 
 fun d(tag: Any, vararg msg: Any?) {
-    logger.d(tag, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.DEBUG)) return
+
+    l.d(tag, *msg)
 }
 
 fun d(tag: Any, tr: Throwable, vararg msg: Any?) {
-    logger.d(tag, tr, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.DEBUG)) return
+
+    l.d(tag, tr, *msg)
 }
 
 fun i(tag: Any, vararg msg: Any?) {
-    logger.i(tag, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.INFO)) return
+
+    l.i(tag, *msg)
 }
 
 fun i(tag: Any, tr: Throwable, vararg msg: Any?) {
-    logger.i(tag, tr, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.INFO)) return
+
+    l.i(tag, tr, *msg)
 }
 
 fun w(tag: Any, vararg msg: Any?) {
-    logger.w(tag, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.WARN)) return
+
+    l.w(tag, *msg)
 }
 
 fun w(tag: Any, tr: Throwable, vararg msg: Any?) {
-    logger.w(tag, tr, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.WARN)) return
+
+    l.w(tag, tr, *msg)
 }
 
 fun e(tag: Any, vararg msg: Any?) {
-    logger.e(tag, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.ERROR)) return
+
+    l.e(tag, *msg)
 }
 
 fun e(tag: Any, tr: Throwable, vararg msg: Any?) {
-    logger.e(tag, tr, *msg)
+    val l = logger
+    if (!filter.filter(l, Level.ERROR)) return
+
+    l.e(tag, tr, *msg)
 }
