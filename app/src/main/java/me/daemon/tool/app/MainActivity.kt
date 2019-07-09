@@ -7,11 +7,26 @@ import me.daemon.tool.log.*
 
 class MainActivity : AppCompatActivity() {
 
+    var tagGeneratorFlag = true
     var flag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        logLevel = Level.VERBOSE
+        tagGenerator = stackTraceTagGenerator
+        v(this, "onCreate")
+
+        switch_tag_generator.setOnClickListener {
+            if (tagGeneratorFlag) {
+                tagGenerator = defaultTagGenerator
+            } else {
+                tagGenerator = stackTraceTagGenerator
+            }
+
+            tagGeneratorFlag = !tagGeneratorFlag
+        }
 
         click.setOnClickListener {
             if (flag) {
