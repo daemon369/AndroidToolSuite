@@ -23,9 +23,9 @@ var logger: ILogger
 
 var logLevel = Level.WARN
 
-var tagPrefix: String = ""
+var logTagPrefix: String = ""
 
-val defaultTagGenerator: TagGenerator = { tag -> "$tagPrefix$tag" }
+val defaultTagGenerator: TagGenerator = { tag -> "$logTagPrefix$tag" }
 
 val stackTraceTagGenerator: TagGenerator = { _ ->
     val stackTraceElement: StackTraceElement = Thread.currentThread().stackTrace[5]
@@ -33,7 +33,7 @@ val stackTraceTagGenerator: TagGenerator = { _ ->
     var callerClazzName = stackTraceElement.className
     callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1)
 
-    "$tagPrefix - $callerClazzName.${stackTraceElement.methodName}(L:${stackTraceElement.lineNumber})"
+    "$logTagPrefix$callerClazzName.${stackTraceElement.methodName}(L:${stackTraceElement.lineNumber})"
 }
 
 var tagGenerator: TagGenerator = defaultTagGenerator
